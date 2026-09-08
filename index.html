@@ -1,0 +1,1232 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<title>A Letter From My Heart</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+    font-family:Georgia,"Times New Roman",serif;
+    background:#10050d;
+    color:white;
+}
+
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.background{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 15% 20%,rgba(255,80,145,.25),transparent 30%),
+        radial-gradient(circle at 85% 80%,rgba(130,75,255,.22),transparent 30%),
+        radial-gradient(circle at 50% 50%,rgba(255,170,200,.08),transparent 35%),
+        linear-gradient(135deg,#12050e,#280a1d,#0c0610);
+    z-index:-10;
+}
+
+.glow{
+    position:absolute;
+    width:35vw;
+    height:35vw;
+    min-width:200px;
+    min-height:200px;
+    border-radius:50%;
+    filter:blur(80px);
+    opacity:.35;
+    animation:moveGlow 10s infinite alternate ease-in-out;
+}
+
+.glow.one{
+    background:#ff3f85;
+    top:-15%;
+    left:-10%;
+}
+
+.glow.two{
+    background:#733cff;
+    right:-12%;
+    bottom:-15%;
+    animation-delay:2s;
+}
+
+.glow.three{
+    background:#ff9fc4;
+    width:20vw;
+    height:20vw;
+    top:40%;
+    left:40%;
+    animation-delay:4s;
+}
+
+
+/* =========================
+   STARS
+========================= */
+
+.star{
+    position:fixed;
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background:white;
+    opacity:.6;
+    animation:twinkle 2.5s infinite alternate;
+}
+
+.s1{top:12%;left:8%}
+.s2{top:18%;left:88%;animation-delay:.5s}
+.s3{top:76%;left:7%;animation-delay:1s}
+.s4{top:84%;left:92%;animation-delay:1.5s}
+.s5{top:40%;left:95%;animation-delay:2s}
+.s6{top:55%;left:4%;animation-delay:.8s}
+.s7{top:8%;left:50%;animation-delay:1.2s}
+.s8{top:92%;left:50%;animation-delay:.3s}
+
+
+/* =========================
+   FLOATING SYMBOLS
+========================= */
+
+.float{
+    position:fixed;
+    bottom:-50px;
+    color:rgba(255,130,175,.3);
+    pointer-events:none;
+    animation:floatUp 9s linear infinite;
+    z-index:-2;
+}
+
+.f1{left:8%;font-size:25px}
+.f2{left:25%;font-size:16px;animation-delay:2s}
+.f3{left:70%;font-size:30px;animation-delay:4s}
+.f4{left:90%;font-size:20px;animation-delay:6s}
+.f5{left:48%;font-size:18px;animation-delay:3s}
+
+
+/* =========================
+   TOP NAVIGATION
+========================= */
+
+.navigation{
+    position:fixed;
+    top:18px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:100;
+    display:flex;
+    gap:8px;
+    padding:9px 14px;
+    border-radius:50px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.15);
+    backdrop-filter:blur(15px);
+}
+
+.dot{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:rgba(255,255,255,.3);
+    transition:.4s;
+}
+
+.dot.active{
+    width:30px;
+    border-radius:20px;
+    background:#ff79a9;
+    box-shadow:0 0 18px #ff79a9;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.page{
+    width:100%;
+    height:100vh;
+    min-height:500px;
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    padding:65px 18px 25px;
+
+    animation:pageIn .7s ease;
+}
+
+.page.active{
+    display:flex;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+    width:min(94%,900px);
+    max-height:calc(100vh - 90px);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+}
+
+
+/* =========================
+   PREMIUM FRAME
+========================= */
+
+.frame{
+    width:100%;
+    max-height:calc(100vh - 100px);
+
+    padding:clamp(25px,4vh,45px) clamp(20px,5vw,55px);
+
+    border-radius:32px;
+
+    background:rgba(255,255,255,.065);
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.16);
+
+    box-shadow:
+        0 25px 90px rgba(0,0,0,.4),
+        inset 0 1px 0 rgba(255,255,255,.15);
+
+    position:relative;
+
+    overflow:auto;
+}
+
+.frame::-webkit-scrollbar{
+    width:0;
+}
+
+
+/* =========================
+   CORNERS
+========================= */
+
+.corner{
+    position:absolute;
+    width:65px;
+    height:65px;
+    border-color:rgba(255,150,190,.35);
+}
+
+.corner.top-left{
+    top:15px;
+    left:15px;
+    border-top:2px solid;
+    border-left:2px solid;
+    border-radius:15px 0 0 0;
+}
+
+.corner.top-right{
+    top:15px;
+    right:15px;
+    border-top:2px solid;
+    border-right:2px solid;
+    border-radius:0 15px 0 0;
+}
+
+.corner.bottom-left{
+    bottom:15px;
+    left:15px;
+    border-bottom:2px solid;
+    border-left:2px solid;
+    border-radius:0 0 0 15px;
+}
+
+.corner.bottom-right{
+    bottom:15px;
+    right:15px;
+    border-bottom:2px solid;
+    border-right:2px solid;
+    border-radius:0 0 15px 0;
+}
+
+
+/* =========================
+   LABEL
+========================= */
+
+.label{
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    letter-spacing:4px;
+    color:#ffadc8;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+
+/* =========================
+   HEART
+========================= */
+
+.heart{
+    width:clamp(70px,10vh,105px);
+    height:clamp(70px,10vh,105px);
+
+    margin:0 auto 15px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:50%;
+
+    background:rgba(255,100,155,.08);
+    border:1px solid rgba(255,160,195,.2);
+
+    box-shadow:
+        0 0 40px rgba(255,75,140,.25),
+        inset 0 0 25px rgba(255,255,255,.05);
+
+    color:#ff80ad;
+
+    font-size:clamp(42px,7vh,65px);
+
+    animation:heartbeat 1.5s infinite;
+}
+
+
+/* =========================
+   HEADINGS
+========================= */
+
+h1{
+    font-size:clamp(38px,7vw,76px);
+    line-height:.98;
+    letter-spacing:-2px;
+    margin-bottom:15px;
+
+    background:linear-gradient(
+        120deg,
+        #ffffff,
+        #ffb8d1,
+        #e0c9ff,
+        #ffffff
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+h2{
+    font-size:clamp(32px,5.5vw,60px);
+    line-height:1;
+    margin-bottom:15px;
+
+    background:linear-gradient(
+        120deg,
+        #ffffff,
+        #ffb8d1,
+        #dec8ff
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+    color:#d6bdc9;
+    font-size:clamp(14px,2vw,19px);
+    line-height:1.5;
+    margin-bottom:20px;
+}
+
+
+/* =========================
+   DIVIDER
+========================= */
+
+.divider{
+    width:100px;
+    height:1px;
+    margin:0 auto 22px;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #ff7fa9,
+        transparent
+    );
+}
+
+.divider span{
+    position:relative;
+    top:-10px;
+    background:#24101c;
+    padding:0 10px;
+    color:#ff9cbd;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message{
+    width:100%;
+    max-width:730px;
+
+    padding:clamp(20px,3vh,32px);
+
+    margin:0 auto 22px;
+
+    border-radius:25px;
+
+    background:linear-gradient(
+        135deg,
+        rgba(255,220,235,.09),
+        rgba(220,200,255,.06)
+    );
+
+    border:1px solid rgba(255,255,255,.12);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.1),
+        0 15px 45px rgba(0,0,0,.2);
+}
+
+.message p{
+    color:#eadbe2;
+    font-size:clamp(14px,1.8vw,18px);
+    line-height:1.65;
+}
+
+.highlight{
+    color:#ffabc7;
+    font-weight:bold;
+    font-size:clamp(16px,2vw,21px);
+}
+
+
+/* =========================
+   REASON CARDS
+========================= */
+
+.reasons{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    width:100%;
+    max-width:730px;
+    margin:0 auto 20px;
+}
+
+.reason{
+    padding:17px 12px;
+    border-radius:20px;
+
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.1);
+
+    color:#d9c7d0;
+    font-family:Arial,sans-serif;
+    font-size:13px;
+    line-height:1.45;
+}
+
+.reason-number{
+    display:block;
+    color:#ff91b5;
+    font-size:21px;
+    margin-bottom:7px;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+button{
+    border:none;
+    cursor:pointer;
+
+    padding:13px 28px;
+
+    border-radius:50px;
+
+    font-family:Arial,sans-serif;
+    font-size:14px;
+
+    transition:.3s;
+}
+
+.next{
+    color:white;
+
+    background:linear-gradient(
+        135deg,
+        #d84d82,
+        #914ed0
+    );
+
+    box-shadow:
+        0 8px 25px rgba(211,75,130,.3);
+}
+
+.back{
+    color:#e9d9e1;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.13);
+}
+
+button:hover{
+    transform:translateY(-3px) scale(1.04);
+}
+
+button:active{
+    transform:scale(.97);
+}
+
+
+/* =========================
+   FINAL
+========================= */
+
+.final-message{
+    font-size:clamp(15px,2vw,19px);
+}
+
+.signature{
+    margin-top:14px;
+    color:#ffabc7;
+    font-style:italic;
+    font-size:14px;
+}
+
+
+/* =========================
+   SURPRISE
+========================= */
+
+.surprise{
+    display:none;
+    margin-top:16px;
+    animation:surprise .7s ease;
+}
+
+.surprise.show{
+    display:block;
+}
+
+.surprise-title{
+    color:#ffb4cc;
+    font-size:clamp(18px,3vw,25px);
+    font-weight:bold;
+}
+
+.surprise-text{
+    color:#cdb8c4;
+    font-family:Arial,sans-serif;
+    font-size:13px;
+    margin-top:5px;
+}
+
+
+/* =========================
+   PAGE NUMBER
+========================= */
+
+.page-number{
+    position:absolute;
+    top:22px;
+    right:28px;
+
+    color:#9f8491;
+    font-family:Arial,sans-serif;
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes pageIn{
+
+    from{
+        opacity:0;
+        transform:scale(.94) translateY(25px);
+        filter:blur(6px);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1) translateY(0);
+        filter:blur(0);
+    }
+
+}
+
+@keyframes heartbeat{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.1);
+    }
+
+}
+
+@keyframes twinkle{
+
+    from{
+        opacity:.2;
+        transform:scale(.5);
+    }
+
+    to{
+        opacity:.9;
+        transform:scale(1.6);
+    }
+
+}
+
+@keyframes floatUp{
+
+    0%{
+        transform:translateY(0) rotate(0);
+        opacity:0;
+    }
+
+    15%{
+        opacity:.7;
+    }
+
+    100%{
+        transform:translateY(-110vh) rotate(360deg);
+        opacity:0;
+    }
+
+}
+
+@keyframes moveGlow{
+
+    from{
+        transform:translate(0,0) scale(1);
+    }
+
+    to{
+        transform:translate(80px,-50px) scale(1.25);
+    }
+
+}
+
+@keyframes surprise{
+
+    from{
+        opacity:0;
+        transform:scale(.6);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .page{
+        padding:58px 10px 15px;
+    }
+
+    .content{
+        width:98%;
+        max-height:calc(100vh - 73px);
+    }
+
+    .frame{
+        max-height:calc(100vh - 75px);
+        padding:25px 15px;
+        border-radius:25px;
+    }
+
+    .corner{
+        width:45px;
+        height:45px;
+    }
+
+    .page-number{
+        top:15px;
+        right:20px;
+    }
+
+    .message{
+        padding:18px 15px;
+        margin-bottom:17px;
+    }
+
+    .message p{
+        line-height:1.55;
+    }
+
+    .reasons{
+        gap:7px;
+    }
+
+    .reason{
+        padding:12px 7px;
+        font-size:11px;
+    }
+
+    .reason-number{
+        font-size:17px;
+        margin-bottom:4px;
+    }
+
+    button{
+        padding:11px 21px;
+        font-size:13px;
+    }
+
+}
+
+
+/* =========================
+   VERY SMALL SCREENS
+========================= */
+
+@media(max-height:650px){
+
+    .page{
+        padding-top:50px;
+    }
+
+    .heart{
+        width:65px;
+        height:65px;
+        font-size:40px;
+        margin-bottom:8px;
+    }
+
+    h1{
+        font-size:36px;
+        margin-bottom:8px;
+    }
+
+    h2{
+        font-size:32px;
+        margin-bottom:8px;
+    }
+
+    .subtitle{
+        margin-bottom:12px;
+    }
+
+    .divider{
+        margin-bottom:13px;
+    }
+
+    .message{
+        padding:15px;
+        margin-bottom:12px;
+    }
+
+    .message p{
+        font-size:13px;
+        line-height:1.45;
+    }
+
+    .reasons{
+        margin-bottom:12px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- BACKGROUND -->
+
+<div class="background">
+
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <div class="glow three"></div>
+
+</div>
+
+
+<!-- STARS -->
+
+<div class="star s1"></div>
+<div class="star s2"></div>
+<div class="star s3"></div>
+<div class="star s4"></div>
+<div class="star s5"></div>
+<div class="star s6"></div>
+<div class="star s7"></div>
+<div class="star s8"></div>
+
+
+<!-- FLOATING HEARTS -->
+
+<div class="float f1">♡</div>
+<div class="float f2">✦</div>
+<div class="float f3">♡</div>
+<div class="float f4">♥</div>
+<div class="float f5">✦</div>
+
+
+<!-- NAVIGATION -->
+
+<div class="navigation">
+
+    <div class="dot active" id="dot1"></div>
+    <div class="dot" id="dot2"></div>
+    <div class="dot" id="dot3"></div>
+
+</div>
+
+
+<!-- =========================
+     PAGE 1
+========================= -->
+
+<section class="page active" id="page1">
+
+<div class="content">
+
+<div class="frame">
+
+<div class="corner top-left"></div>
+<div class="corner top-right"></div>
+<div class="corner bottom-left"></div>
+<div class="corner bottom-right"></div>
+
+<div class="page-number">01 / 03</div>
+
+<div class="label">
+A Little Message
+</div>
+
+<div class="heart">
+♡
+</div>
+
+<h1>
+Before I Say<br>
+Sorry...
+</h1>
+
+<div class="divider">
+<span>✦</span>
+</div>
+
+<p class="subtitle">
+    Priya 🩷
+</p>
+
+<div class="message">
+
+<p>
+
+Nenu Kavalani analenu
+<br><br>
+
+<span class="highlight">
+But hurting you was never my intention.
+</span>
+
+</p>
+
+</div>
+
+<div class="buttons">
+
+<button class="next" onclick="openPage(2)">
+To My Reason →
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     PAGE 2
+========================= -->
+
+<section class="page" id="page2">
+
+<div class="content">
+
+<div class="frame">
+
+<div class="corner top-left"></div>
+<div class="corner top-right"></div>
+<div class="corner bottom-left"></div>
+<div class="corner bottom-right"></div>
+
+<div class="page-number">02 / 03</div>
+
+<div class="label">
+The Reason
+</div>
+
+<div class="heart">
+✦
+</div>
+
+<h2>
+Why I Acted Like That
+</h2>
+
+<div class="divider">
+<span>✦</span>
+</div>
+
+<p class="subtitle">
+</p>
+
+<div class="reasons">
+
+<div class="reason">
+
+<span class="reason-number">
+01
+</span>
+
+Nenu kopam lo unna mi frd payina
+
+</div>
+
+<div class="reason">
+
+<span class="reason-number">
+02
+</span>
+
+Thanu em chesthado chudham anukunna chala kopam lo unna, <br>Niku health bale ani pomani anna
+
+</div>
+
+<div class="reason">
+
+<span class="reason-number">
+03
+</span>
+
+Nenu college bus ki ranu ani ala annanu "nitho ranu" ani <br>
+chala kopam ochindhi mi frd payina
+
+</div>
+
+</div>
+
+<div class="message">
+
+<p>
+
+Ninnu yendhuku anta chp priya yeppudu ayina annana chp <br> nen college bus ki ranu ani ala anna.
+
+<br><br>
+
+<span class="highlight">
+    Sorry Priya 🩷<br>
+</span>
+
+<br><br>
+
+This website is a little message from my heart to you Priya 🩷
+
+</p>
+
+</div>
+
+<div class="buttons">
+
+<button class="back" onclick="openPage(1)">
+← Back
+</button>
+
+<button class="next" onclick="openPage(3)">
+My Sorry ♥
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     PAGE 3
+========================= -->
+
+<section class="page" id="page3">
+
+<div class="content">
+
+<div class="frame">
+
+<div class="corner top-left"></div>
+<div class="corner top-right"></div>
+<div class="corner bottom-left"></div>
+<div class="corner bottom-right"></div>
+
+<div class="page-number">03 / 03</div>
+
+<div class="label">
+From My Heart
+</div>
+
+<div class="heart">
+♥
+</div>
+
+<h2>
+I'm Truly Sorry
+</h2>
+
+<div class="divider">
+<span>✦</span>
+</div>
+
+<div class="message">
+
+<p class="final-message">
+
+sorry priya 🩷
+
+<br><br>
+
+Nenu ni payina asal kopam chupiyyanu yeppudu <br>
+Nenu college bus ki ranu ani ala annanu,<br>
+Nv po nen ostha ante polevu so college bus ki ranu which means "Nitho ranu" ani annanu <br>
+anthe vere intention ledu priya 🩷 
+<br><br>
+
+
+<span class="highlight">
+I just hope you can forgive me.
+</span>
+
+<br><br>
+
+Gurthupettuko nenu ni payina kopam chupiyyanu <br>
+gurthuthechuko yeppudu ayina chupinchaana
+
+<br><br>
+
+Nenu school lo kani inter lo kani na best friends payina kuda chupinchalenu nenu chupinchanu.
+
+<br><br>
+
+I'll don't show my anger on you
+
+<div class="signature">
+— From Spoorthi with Love towards you Priya 🩷
+</div>
+
+</p>
+
+</div>
+
+<div class="buttons">
+
+<button class="back" onclick="openPage(2)">
+← Back
+</button>
+
+<button class="next" onclick="surprise()">
+Click for love 🫶
+</button>
+
+</div>
+
+<div class="surprise" id="surprise">
+
+<div class="surprise-title">
+Please Accept my sorry ♡
+</div>
+
+<div class="surprise-text">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<script>
+
+
+/* =========================
+   PAGE CHANGE
+========================= */
+
+function openPage(number){
+
+    document.querySelectorAll(".page").forEach(function(page){
+
+        page.classList.remove("active");
+
+    });
+
+
+    document.getElementById("page" + number)
+        .classList.add("active");
+
+
+    document.querySelectorAll(".dot").forEach(function(dot){
+
+        dot.classList.remove("active");
+
+    });
+
+
+    document.getElementById("dot" + number)
+        .classList.add("active");
+
+}
+
+
+/* =========================
+   FINAL SURPRISE
+========================= */
+
+function surprise(){
+
+    document.getElementById("surprise")
+        .classList.add("show");
+
+    createFloatingHearts();
+
+}
+
+
+/* =========================
+   HEART BURST
+========================= */
+
+function createFloatingHearts(){
+
+    const symbols = ["♥","♡","✦","♡","♥"];
+
+    for(let i=0;i<30;i++){
+
+        const element = document.createElement("div");
+
+        element.innerHTML =
+            symbols[Math.floor(Math.random()*symbols.length)];
+
+        element.style.position = "fixed";
+        element.style.left = Math.random()*100 + "%";
+        element.style.bottom = "-30px";
+        element.style.fontSize =
+            (14 + Math.random()*25) + "px";
+        element.style.color = "#ff83ad";
+        element.style.zIndex = "200";
+        element.style.pointerEvents = "none";
+
+        document.body.appendChild(element);
+
+
+        const time = 2500 + Math.random()*3000;
+
+
+        element.animate(
+
+            [
+                {
+                    transform:"translateY(0) scale(.5) rotate(0deg)",
+                    opacity:0
+                },
+
+                {
+                    transform:
+                        "translateY(-50vh) scale(1.2) rotate(180deg)",
+                    opacity:1
+                },
+
+                {
+                    transform:
+                        "translateY(-110vh) scale(.7) rotate(360deg)",
+                    opacity:0
+                }
+            ],
+
+            {
+                duration:time,
+                easing:"ease-out"
+            }
+
+        );
+
+
+        setTimeout(function(){
+
+            element.remove();
+
+        },time);
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
